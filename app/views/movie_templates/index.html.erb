@@ -2,6 +2,42 @@
   List of all movies
 </h1>
 
+<form action="/insert_movie_record" method="post">
+  <div>
+    <label for="title_field">Title</label>
+    <input id ="title_field" type="text" name="the_title">
+  </div>
+
+  <div>
+    <label for="year_field">Year</label>
+    <input id ="year_field" type="text" name="the_year">
+  </div>
+
+  <div>
+    <label for="duration_field">Duration</label>
+    <input id ="duration_field" type="text" name="the_duration">
+  </div>
+
+  <div>
+    <label for="description_field">Description</label>
+    <input id ="description_field" type="text" name="the_description">
+  </div>
+
+  <div>
+    <label for="image_field">Image</label>
+    <input id ="image_field" type="text" name="the_image">
+  </div>
+
+  <div>
+    <label for="director_id_field">Director ID</label>
+    <input id ="director_id_field" type="text" name="the_director_id">
+  </div>
+
+  <button>
+    Create movie
+  </button>
+</form>
+
 <hr>
 
 <table border="1">
@@ -31,36 +67,41 @@
   </tr>
 
   <% @list_of_movies.each do |a_movie| %>
-  <tr>
-    <td>
-      <%= a_movie.id %>
-    </td>
+    <tr>
+      <td>
+        <%= a_movie.id %>
+      </td>
 
-    <td>
-      <img src="<%= a_movie.image %>" style="width:250px;">
-    </td>
+      <td>
+        <img src="<%= a_movie.image %>" style="width:250px;">
+      </td>
 
-    <td>
-      <%= a_movie.title %>
-    </td>
+      <td>
+        <%= a_movie.title %>
+      </td>
 
-    <td>
-      <%= a_movie.year %>
-    </td>
+      <td>
+        <%= a_movie.year %>
+      </td>
 
-    <td>
-      <% matching_directors = Director.where({ :id => a_movie.director_id }) %>
-      
-      <% the_director = matching_directors.at(0) %>
+      <td>
+        <% matching_directors = Director.where({ :id => a_movie.director_id }) %>
 
-      <%= the_director.name %>
-    </td>
+        <% the_director = matching_directors.at(0) %>
 
-    <td>
-      <a href="/movies/<%= a_movie.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
+        <% if the_director == nil %>
+          Uh oh! We weren't able to find a director for this movie.
+        <% else %>
+          <%= the_director.name %>
+        <% end %>
+
+      </td>
+
+      <td>
+        <a href="/movies/<%= a_movie.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
   <% end %>
 </table>
