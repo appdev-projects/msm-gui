@@ -4,6 +4,60 @@
 
 <hr>
 
+<form action="/insert_movie" method="post">
+  <div>
+    <label for="title_box">
+      Title
+    </label>
+
+    <input type="text" id="title_box" name="query_title">
+  </div>
+
+  <div>
+    <label for="year_box">
+      Year
+    </label>
+
+    <input type="text" id="year_box" name="query_year">
+  </div>
+
+  <div>
+    <label for="duration_box">
+      Duration
+    </label>
+
+    <input type="text" id="duration_box" name="query_duration">
+  </div>
+
+  <div>
+    <label for="description_box">
+      Description
+    </label>
+
+    <textarea id="description_box" name="query_description" rows="3"></textarea>
+  </div>
+
+  <div>
+    <label for="image_box">
+      Image
+    </label>
+
+    <input type="text" id="image_box" name="query_image">
+  </div>
+
+  <div>
+    <label for="director_id_box">
+      Director ID
+    </label>
+
+    <input type="text" id="director_id_box" name="query_director_id">
+  </div>
+
+  <button>
+    Create movie
+  </button>
+</form>
+
 <table border="1">
   <tr>
     <th>
@@ -53,7 +107,11 @@
       
       <% the_director = matching_directors.at(0) %>
 
+      <% if the_director == nil%>
+      Uh oh! We weren't able to find a director for this movie.
+      <%else %>
       <%= the_director.name %>
+      <%end %>
     </td>
 
     <td>
